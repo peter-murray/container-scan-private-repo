@@ -1,0 +1,31 @@
+name: Container Scan
+
+on:
+  workflow_dispatch:
+    inputs:
+      container_tag:
+        description: Container image tag
+        required: true
+        default: freenet-base-image/freenet-base-image:sha-d57bb89
+        
+      container_registry:
+        description: Container Registry
+        required: true
+        default: docker.pkg.github.com
+        
+      container_registry_path:
+        description: Container Registry Path
+        required: true
+        default: octodemo/freenet-base-image
+        
+jobs:
+  scan_image:
+    name: Scan Container Image
+    
+    runs-on: ubuntu:20.04
+    
+    steps:
+      - name: Authenticate with Registry
+        run: |
+          echo ${{ secrets.CONTAINER_REGISTRY_PASSWORD }} | docker login ${{ github.event.inputs.container_registry }} -u ${{ secrets.CONTAINER_REGISTRY_USERNAME }} --password-stdin
+          
