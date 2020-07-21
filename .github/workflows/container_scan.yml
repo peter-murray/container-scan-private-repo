@@ -6,7 +6,7 @@ on:
       container_tag:
         description: Container image tag
         required: true
-        default: freenet-base-image/freenet-base-image:sha-d57bb89
+        default: freenet-base-image:sha-d57bb89
         
       container_registry:
         description: Container Registry
