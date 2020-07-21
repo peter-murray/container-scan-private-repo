@@ -29,3 +29,7 @@ jobs:
         run: |
           echo ${{ secrets.CONTAINER_REGISTRY_PASSWORD }} | docker login ${{ github.event.inputs.container_registry }} -u ${{ secrets.CONTAINER_REGISTRY_USERNAME }} --password-stdin
           
+      - name: Pull Container Image
+        run: |
+          docker pull ${{ github.event.inputs.container_registry }}/${{ github.event.inputs.container_registry_path }}/${{ github.event.inputs.container_tag }}
+          
